@@ -1,0 +1,20 @@
+<!-- sign-up.component.html -->
+
+<br>
+<br>
+<div class="clinic-frame">
+  Welcome to our clinic🩺
+  <input type="text" class="username-button" [(ngModel)]="userName" placeholder="Enter your username">
+  <br>
+  <input type="text" class="mail-button" [(ngModel)]="email" placeholder="Enter your Email">
+  <br>
+  <input type="password" class="password-button" [(ngModel)]="password" placeholder="Enter your Password">
+  <br>
+  <label class="user-option">User Type:</label>
+  <input type="radio" name="userType" class="user-option" value="Patient" checked [(ngModel)]="userType">
+  <label for="patient"><font style="font-size: 68%;">Patient</font></label>
+  <input type="radio" name="userType" class="user-option" value="Doctor" [(ngModel)]="userType">
+  <label for="doctor"><font style="font-size: 68%;">Doctor</font></label>
+  <br>
+  <button class="register-button" (click)="registerUser()">Register</button>
+</div>

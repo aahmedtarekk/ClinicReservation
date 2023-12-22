@@ -1,0 +1,35 @@
+
+<!-- Doctorframe -->
+<div class="doctor-frame">
+    Hello Doctor 👩‍⚕️
+    <table class="appointments-table">
+      <caption>doc. Appointments</caption>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let slot of doctorSlots">
+          <td>
+            <span *ngIf="!slot.editMode">{{ slot.Date }}</span>
+            <input *ngIf="slot.editMode" [(ngModel)]="slot.Date" />
+          </td>
+          <td>
+            <span *ngIf="!slot.editMode">{{ slot.Time }}</span>
+            <input *ngIf="slot.editMode" [(ngModel)]="slot.Time" />
+          </td>
+          <td>
+            <button *ngIf="!slot.editMode" (click)="editSlot(slot)">Edit</button>
+            <button *ngIf="slot.editMode" (click)="saveSlot(slot)">Save</button>
+          </td>
+          <td><button (click)="cancelSlot(slot)">Cancel</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="add-slot-button" (click)="addSlot()">Add Slot</button>
+  </div>
+  

@@ -1,0 +1,48 @@
+<!-- Patient frame -->
+<div class="patient-frame">
+    Hello Patient 🏥
+    <table class="appointments-table">
+      <caption>patient Appointments</caption>
+      <thead>
+        <tr>
+          <th>Doctor Name</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of patientAppointments">
+          <td>
+            <span *ngIf="!appointment.editMode">{{ appointment.DoctorName }}</span>
+            <select *ngIf="appointment.editMode" [(ngModel)]="appointment.DoctorName" (change)="onDoctorSelection(appointment)">
+              <option value="" disabled selected>Doctor Name</option>
+              <option *ngFor="let doctor of doctors" [value]="doctor.Name">{{ doctor.Name }}</option>
+            </select>
+        </td>
+          <td>
+              <span *ngIf="!appointment.editMode">{{ appointment.Slot.Date }}</span>
+              <select *ngIf="appointment.editMode" [(ngModel)]="appointment.Slot.Date" (change)="onDateSelection(appointment.Slot.Date)">
+                <option value="" disabled selected>Date</option>
+                <option *ngFor="let date of dates" [value]="date">{{ date }}</option>
+              </select>
+          </td>
+          <td>
+              <span *ngIf="!appointment.editMode">{{ appointment.Slot.Time }}</span>
+              <select *ngIf="appointment.editMode" [(ngModel)]="appointment.Slot.Time">
+                <option value="" disabled selected>Time</option>
+                <option *ngFor="let time of times" [value]="time" [disabled]="isTimeReserved(appointment.Slot.Date, time)">{{ time }}</option>
+              </select>
+          </td>
+          <td>
+            <button *ngIf="!appointment.editMode" (click)="editAppointment(appointment)">Edit</button>
+              <button *ngIf="appointment.editMode" (click)="saveAppointment(appointment)">Save</button>
+          </td>
+          <td><button (click)="cancelAppointment(appointment)">Cancel</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="add-slot-button" (click)="addPatientAppointment()">Add Appointment</button>
+  </div>
+  
